@@ -35,22 +35,37 @@
 * **Open Source Catch Up:** `qwen3-next-80b` hit **85.2%**, beating standard industry models like `gpt-4o`.
 * **The Hardest Domain:** *Topic 3 (Safety and Autonomy)* plunged to an overall **69.3%** pass rate.
 
-## Slide 7: Discussion Part 1 — The "Commonsense" Override
+## Slide 7: Deep Dive on Topic 1 (Visual Perception)
+* **What We Tested:** Static logical invariants, counting gaps, and perception (WHOOPS, BlindTest, ROME).
+* **Top Models:** `gpt-5-mini` (100%), `claude-3-5-haiku` (95.8%), `gpt-4o` (91.7%).
+* **Why they won:** Compact reasoning models strictly evaluate instructions instead of reflexively pulling from broad "world knowledge," easily allowing them to resist "commonsense" overrides.
+
+## Slide 8: Deep Dive on Topic 2 (Spatial & Tool-Use)
+* **What We Tested:** Dynamic 3D environments, maze navigation, and distance tracking (SpatialVLM, AlphaMaze).
+* **Top Models:** `gpt-5` (100%), `gpt-5-mini` (92.9%), `gpt-4o` (85.7%).
+* **Why they won:** Tracking step logic through a 3-dimensional maze leverages massive mathematical pathing matrices, where the absolute highest parameter frontiers tend to have structural advantages.
+
+## Slide 9: Deep Dive on Topic 3 (Safety & Autonomy)
+* **What We Tested:** Syntax sensitivity, action boundaries, and adversarial override (BadRobot, EgoNormia, Code as Policies).
+* **Top Models:** Massive 5-Way Tie at 81.2% (`gpt-5`, `gpt-5-mini`, `o3-mini`, `claude-sonnet-4-6`, `claude-3-7-sonnet`).
+* **Why they won:** This was the toughest domain. Modern models won because they use "System 2" thinking—pausing to explicitly trace safety boundaries and inhibiting basic generation reflexes.
+
+## Slide 10: Discussion Part 1 — The "Commonsense" Override
 * **The Concept:** Training bias violently overwrites explicit instructions.
 * **The Test Example:** (Zhou et al., ROME) We told 12 models: *"There is a cow fully inside a microwave."* We asked: *"Is the cow inside?".*
 * **The Reality Check:** Only **33.3%** of models correctly passed this. 8 of the 12 models reverted to their training priors ("cows don't fit in microwaves") and refused to acknowledge the truth. 
 
-## Slide 8: Discussion Part 2 — Extreme Prompt Sensitivity
+## Slide 11: Discussion Part 2 — Extreme Prompt Sensitivity
 * **Semantic Fragility:** Are LLMs actually reasoning spatially, or just matching patterns?
 * We recreated prompt variants from *Zhao 2024* & *Liang 2023*. We changed the grammatical sequence of sentences but kept the exact spatial meaning identical.
 * **The Outcome:** A horrific **52.4% pass rate** for prompt sensitivity tasks. The models frequently flipped their answers entirely when the sentence structure changed, proving spatial understanding is dangerously brittle. 
 
-## Slide 9: Discussion Part 3 — The Embodied AI Navigation Gap
+## Slide 12: Discussion Part 3 — The Embodied AI Navigation Gap
 * Perceiving a scene statically is easy; but moving efficiently is hard.
 * Navigation and heuristic overrides (Maze-Nav counting, physical action sequencing) frequently failed miserably across the board.
 * As tasks move from "Identification" to "Action", AI logic severely degrades.
 
-## Slide 10: Conclusion & Takeaways
+## Slide 13: Conclusion & Takeaways
 * **Scaling is Not Everything:** The superiority of logic-distilled models (like `gpt-5-mini`) over sheer parameter-count models proves architectural tuning is beating raw size.
 * **The Root of Failure:** Our text-proxy strategy confidently asserts that modern Embodied AI failures aren't just vision bottlenecks; they are rooted in crippling linguistic logic bias.
 * **Future Application:** For practical deployment of robotics and agents, training protocols must be designed to successfully untangle an AI's linguistic "commonsense" rulebook from its real-time observational capabilities.
