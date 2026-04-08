@@ -1,0 +1,50 @@
+# NotebookLM Source Document
+**Title:** Visual Truth vs. Linguistic Bias: A Benchmark on LLM Reasoning Failures in Embodied Robustness
+**Authors:** Mohammed Moulai, Ahmad El abad, Muman (Group 7)
+**Context:** Selected Topics of Data Science, Seminar 2, Winter 2026
+
+## 1. Abstract & Core Problem
+Modern Vision-Language Models (VLMs) like GPT-4o and Claude possess vast encyclopedic knowledge and can write brilliant essays. However, when deployed in physical environments—a field known as **Embodied AI**—these models frequently fail at elementary spatial logic. Our core research question is: Do these failures happen because the AI has a "blurry camera" (a sensory failure in its Vision Encoder), or because its central brain is mathematically and logically biased (Reasoning Failure)? To prove where the break happens, we tested 12 of the most advanced models using a unique "text-proxy" methodology.
+
+## 2. The Methodology: "Text-Proxies"
+Usually, to test an AI's vision, you feed it an image. We explicitly chose not to do this. Instead, we translated the exact physical blueprints of scenes into explicit text queries (e.g., "Imagine a scene. There is a cow entirely inside a standard-sized microwave. Is the cow inside?"). 
+
+**Why we did this:** By removing the image entirely, we removed the "vision encoder" from the equation. If an AI fails to answer a spatial question when given a perfect, undeniably true text description, it provides absolute mathematical proof that the AI's core **Reasoning Engine** is biased or structurally flawed.
+
+## 3. The Benchmark Suite
+We consolidated 14 leading AI research papers (such as WHOOPS, ROME, BlindTest, and SpatialVLM) into 54 discrete tests grouped into three structural topics:
+* **Topic 1: Visual Perception.** Testing basic logic and counting.
+* **Topic 2: Spatial & Tool-Use Reasoning.** Testing 3D environments and maze navigation.
+* **Topic 3: Safety & Long-Term Autonomy.** Testing action boundaries and adversarial (tricky) commands.
+
+## 4. The Models Tested
+We executed exactly 648 API calls across 12 modern models via OpenRouter to see how architectural families differed:
+* **New Frontier:** `gpt-5`, `claude-sonnet-4-6`, `gemini-3-1-pro`
+* **Legacy Frontier:** `gpt-4o`, `claude-3-7-sonnet`, `gemini-2-5-pro`
+* **Mini / Reasoning:** `gpt-5-mini`, `o3-mini`, `claude-3-5-haiku`
+* **Open Source:** `llama-3-3-70b`, `qwen3-next-80b`, `deepseek-r1`
+
+## 5. Significant Findings & Discoveries
+
+### Finding A: The Superiority of Distilled Logic Models
+Historically, AI researchers believed "larger models are smarter" (Scaling Laws). Our benchmark broke that paradigm. `gpt-5-mini` (a deeply distilled reasoning model) absolutely crushed large legacy models, scoring a massive **92.6% pass rate** globally. 
+* **The Reason:** Coding requires a massive memory vault (billions of parameters). Logic puzzles require strict discipline and constraint-tracking. Because `gpt-5-mini` utilizes "inference compute" (thinking before it speaks via system 2 logic), it tracks rules perfectly, whereas older models reflexively spit out answers using basic pattern matching.
+
+### Finding B: The Commonsense Override (Training Bias)
+We observed that standard models suffer from crippling hallucination when confronted with an anomaly. 
+* **The Test:** The ROME Benchmark (Zhou et al.) where we tested the "cow in the microwave". 
+* **The Result:** Only 33.3% of models correctly answered the test. 
+* **The Reason:** 8 out of 12 models aggressively overwrote reality. Because their pre-training heavily insists that "cows don't fit in microwaves", they refused to believe the explicit prompt data. This proves that an autonomous car or a surgical AI might overwrite a weird anomaly in front of it simply because it statistically breaks its assumptions.
+
+### Finding C: Extreme Prompt Sensitivity
+Are these models actually understanding physical space, or are they linguistic tricksters? We tested variant phrasing from Liang et al. (e.g., swapping "The ball is left of the cube" to "Left of the cube is the ball"). 
+* **The Result:** We observed a devastating 52% average pass rate. Models frequently flipped their answers just because the grammatical sequence changed, proving that their spatial understanding is desperately brittle.
+
+## 6. Glossary of Reasoning Failures
+* **Spatial Failures:** When an AI cannot track geometry or calculates 1D/2D distances incorrectly sequentially.
+* **Safety Failures:** When an AI completes a task efficiently but violates critical boundaries (e.g., throwing a laptop into the garbage to achieve a "clean desk").
+* **Binding Failures:** The AI correctly sees the traits of a scene (e.g., "red", "green", "circle", "square") but glues them incorrectly in its memory ("Ah, a green square").
+* **Adversarial Vulnerability:** When a model is easily tricked into dropping a heavy box on a human because the phrasing manipulated its safety protocol priorities.
+
+## 7. Ultimate Conclusion
+The empirical data gathered across 648 test instances firmly points to one terrifying reality for embodied AI: The danger does not stem solely from poor cameras or blurry vision tracking. The danger lies in the core reasoning nets. Modern AI is so heavily biased by its linguistic conditioning that it will forcefully delete or misinterpret direct physical reality if that reality breaks its structural assumptions. The future of robotics depends entirely on untangling semantic "world knowledge" from "active sensor obedience."
